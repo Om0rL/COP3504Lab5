@@ -1,17 +1,4 @@
 #include <iostream>
-<<<<<<< HEAD
-#include <string>
-#include "StringData.h"
-
-
-
-int main() {
-    std::vector<std::string> data;
-    data = getStringData();
-    std::cout<< data[1] << std::endl;
-    return 0;
-}
-=======
 #include "StringData.h"
 #include <vector>
 
@@ -22,82 +9,57 @@ int binarySearch(std::vector<std::string> dataSet, std::string element);
 
 int main() {
     long begin;
-    long time_taken;
+    long end;
     int result;
 
     std::vector<std::string> data = getStringData();
-    begin = systemTimeNanoseconds();
-    linearSearch(data, "aaaaa");
-    time_taken = systemTimeNanoseconds() - begin;
-    std::cout << time_taken;
-    std::cout << "\n";
 
-    begin = systemTimeNanoseconds();
-    binarySearch(data, "aaaaa");
-    time_taken = systemTimeNanoseconds() - begin;
-    std::cout << time_taken;
-    std::cout << "\n";
-
-    begin = systemTimeNanoseconds();
-    linearSearch(data, "mzzzz");
-    time_taken = systemTimeNanoseconds() - begin;
-    std::cout << time_taken;
-    std::cout << "\n";
-
-    begin = systemTimeNanoseconds();
-    binarySearch(data, "mzzzz");
-    time_taken = systemTimeNanoseconds() - begin;
-    std::cout << time_taken;
-    std::cout << "\n";
-
-    begin = systemTimeNanoseconds();
     linearSearch(data, "not_here");
-    time_taken = systemTimeNanoseconds() - begin;
-    std::cout << time_taken;
-    std::cout << "\n";
 
-    begin = systemTimeNanoseconds();
     binarySearch(data, "not_here");
-    time_taken = systemTimeNanoseconds() - begin;
-    std::cout << time_taken;
-    std::cout << "\n";
+
+    linearSearch(data, "mzzzz");
+
+    binarySearch(data, "mzzzz");
+
+    linearSearch(data, "aaaaa");
+
+    binarySearch(data, "aaaaa");
+
     return 0;
 }
 
-int linearSearch(std::vector<std::string> dataSet, std::string element)
-{
-    for(int i = 0; i < dataSet.size(); i++)
-    {
-        if(dataSet.at(i) == element)
-        {
+int linearSearch(std::vector<std::string> dataSet, std::string element){
+    begin = systemTimeNanoseconds();
+    for(int i = 0; i < dataSet.size(); i++){
+        if(dataSet.at(i) == element){
+            end = systemTimeNanoseconds();
+            std::cout << "Element found at " << i << "\n" << "Time used: " << begin - end << "\n\n";
             return i;
         }
     }
+    std::cout << "Element not found." << "\n" << "Time used: " << begin - end << "\n\n";
     return -1;
 }
 
-int binarySearch(std::vector<std::string> dataSet, std::string element)
-{
-    int lower_bound = 0;
-    int higher_bound = dataSet.size() - 1;
-    int middle;
+int binarySearch(std::vector<std::string> dataSet, std::string element){
+    int StartIndex = 0;
+    int EndIndex = dataSet.size() - 1;
+    int MiddleIndex;
 
-    while (lower_bound <= higher_bound)
-    {
-        middle = (lower_bound + higher_bound) / 2;
-        if(dataSet.at(middle).compare(element) > 0)
-        {
-            higher_bound = middle - 1;
+    while (StartIndex <= EndIndex){
+        middle = (StartIndex + EndIndex) / 2;
+        if(dataSet.at(MiddleIndex).compare(element) > 0){
+            EndIndex = MiddleIndex - 1;
         }
-        else if(dataSet.at(middle).compare(element) < 0)
-        {
-            lower_bound = middle + 1;
+        else if(dataSet.at(MiddleIndex).compare(element) < 0){
+            StartIndex = MiddleIndex + 1;
         }
-        else
-        {
-            return middle;
+        else{
+            std::cout << "Element found at " << i << "\n" << "Time used: " << begin - end << "\n\n";
+            return MiddleIndex;
         }
     }
+    std::cout << "Element not found." << "\n" << "Time used: " << begin - end << "\n\n";
     return -1;
 }
->>>>>>> 2e3ea052307430a04bf4378ddb5d4d8addeae6b7
